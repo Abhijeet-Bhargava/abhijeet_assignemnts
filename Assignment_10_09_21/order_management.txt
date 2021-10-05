@@ -1,0 +1,108 @@
+ORDER MANAGEMENT SYSTEM:
+
+ENUMS
+1.UserState
+	NEW, ACTIVE, BLOCKED, INACTIVE
+
+2.OrderStatus
+	ORDERED, CANCELLED, SHIPPED, DELIVERED
+
+3.PaymentType
+	UPI, NETBANKING, CARD
+
+INTERFACES
+1. UserDataDAO
+    	getUserData()
+    	updateUserData()
+    	addUserData()
+    	deleteUserData()
+   	modifyUserState(UserState state)
+
+2. InventoryDataDAO()
+ 	getItems()
+    	updateItems()
+   	addItems()
+    	deleteItems()
+
+ABSTRACT CLASSES
+1. UserServices 
+    	abstract login()
+    	abstract signUp()
+    	abstract updateShippingDetails()
+    	abstract updatePaymentMode()
+	abstract userProfile()
+	abstract userAccessRight()
+
+CLASSES	
+1. User extends UserServices implements UserDataDAO
+    	userId : String
+    	userName : String
+    	password: String
+    	contactNo : long
+    	userState : UserState
+
+    	updateProfile()
+    	updateAccessRights()
+    	updateShippingDetails()
+    	updatePaymentMode() 
+    	login()
+    	signUp()
+    	getUserData()
+    	updateUserData()
+    	addUserData()
+    	deleteUserData()
+    	modifyUserState(UserState state)
+
+2. Customer extends User
+    	deliveryAddress : String
+    	paymentMode : PaymentType
+    	updateProfile()
+    	updateShippingDetails(String deliveryAddress)
+    	updatePaymentMode(PaymentType paymentMode)
+    	login()
+    	signUp()
+
+3. Order
+    -orderNumber : long
+    -orderDate : Date
+    -shippedDate : Date
+    -status : OrderStatus
+    -quantity : int
+    -price : double
+
+    +getOrderNumber()
+    +getOrderDate()
+    +getShippedDate()
+    +setShippedDate(Date shippedDate)
+    +getOrderStatus()
+    +setOrderStatus(OrderStatus status);
+    +getQuantity()
+    +getPrice()
+
+4. Delivery extends Order 
+    -deliveryType : DeliveryMode
+    
+    +getDeliverytype()
+    +setDeliverytype(DeliveryMode deliveryType)
+    +cancelDelivery()
+    +setOrderStatus(OrderStatus status)
+
+5. Product implements InventoryDataDAO
+    -productId : String
+    -productName : String
+    -supplier : String
+    -availableQty : int
+    -costPrice : double
+    -sellingPrice : double
+
+    +getProductId()
+    +getProductName()
+    +getSupplier()
+    +getAvailableQty()
+    +getCostPrice()
+    +getSellingPrice()
+    +setSellingPrice(double price)
+    +getItems()
+    +updateItems()
+    +addItems()
+    +deleteItems()
